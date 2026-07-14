@@ -1,0 +1,476 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  V4 — Dark-first engineering theme.
+  Warm near-black canvas, single amber accent used sparingly, elevation
+  ladder for nested surfaces, glow tokens for hover/focus emphasis instead
+  of flat borders. Light theme kept as a secondary, fully-supported variant.
+*/
+.dark,
+:root {
+  --background: #0a0908;
+  --foreground: #f5f2ed;
+  --surface-0: var(--background);
+  --surface-1: #131110;
+  --surface-2: #1b1816;
+  --surface-3: #24201d;
+  --card: var(--surface-1);
+  --card-foreground: #f5f2ed;
+  --popover: var(--surface-3);
+  --popover-foreground: #f5f2ed;
+  --primary: #f5a524;
+  --primary-foreground: #1a1206;
+  --secondary: var(--surface-2);
+  --secondary-foreground: #f5f2ed;
+  --muted: var(--surface-2);
+  --muted-foreground: #9a938a;
+  --accent: #f5a524;
+  --accent-foreground: #1a1206;
+  --destructive: #ef5350;
+  --destructive-foreground: #1a0605;
+  --border: #262220;
+  --input: #1e1b19;
+  --ring: #f5a524;
+  --chart-1: #f5a524;
+  --chart-2: #f7c873;
+  --chart-3: #6fa3d8;
+  --chart-4: #7cc9a8;
+  --chart-5: #9a938a;
+  --radius: 0.5rem;
+  --sidebar: var(--surface-1);
+  --sidebar-foreground: #f5f2ed;
+  --sidebar-primary: #f5a524;
+  --sidebar-primary-foreground: #1a1206;
+  --sidebar-accent: var(--surface-2);
+  --sidebar-accent-foreground: #f5f2ed;
+  --sidebar-border: #262220;
+  --sidebar-ring: #f5a524;
+
+  --primary-rgb: 245, 165, 36;
+  --foreground-rgb: 245, 242, 237;
+  --background-rgb: 10, 9, 8;
+
+  --glow-primary: rgba(var(--primary-rgb), 0.25);
+  --glow-primary-strong: rgba(var(--primary-rgb), 0.45);
+  --grid-line: rgba(var(--foreground-rgb), 0.06);
+  --noise-opacity: 0.035;
+  --gradient-glow-1: rgba(var(--primary-rgb), 0.18);
+  --gradient-glow-2: rgba(111, 163, 216, 0.12);
+}
+
+/*
+  Light theme — kept as a fully supported secondary variant. Warm paper
+  canvas, same amber accent darkened slightly for AA contrast on white.
+*/
+.light {
+  --background: #faf8f5;
+  --foreground: #1a1613;
+  --surface-0: var(--background);
+  --surface-1: #ffffff;
+  --surface-2: #f2efe9;
+  --surface-3: #e9e4db;
+  --card: var(--surface-1);
+  --card-foreground: #1a1613;
+  --popover: #ffffff;
+  --popover-foreground: #1a1613;
+  --primary: #c17d0a;
+  --primary-foreground: #fffaf0;
+  --secondary: var(--surface-2);
+  --secondary-foreground: #1a1613;
+  --muted: var(--surface-2);
+  --muted-foreground: #6b6357;
+  --accent: #c17d0a;
+  --accent-foreground: #fffaf0;
+  --destructive: #c0362c;
+  --destructive-foreground: #fff8f2;
+  --border: #e4dfd4;
+  --input: #ece6d9;
+  --ring: #c17d0a;
+  --chart-1: #c17d0a;
+  --chart-2: #d9a441;
+  --chart-3: #3f6ea5;
+  --chart-4: #3f8f6c;
+  --chart-5: #6b6357;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1a1613;
+  --sidebar-primary: #c17d0a;
+  --sidebar-primary-foreground: #fffaf0;
+  --sidebar-accent: var(--surface-2);
+  --sidebar-accent-foreground: #1a1613;
+  --sidebar-border: #e4dfd4;
+  --sidebar-ring: #c17d0a;
+
+  --primary-rgb: 193, 125, 10;
+  --foreground-rgb: 26, 22, 19;
+  --background-rgb: 250, 248, 245;
+
+  --glow-primary: rgba(var(--primary-rgb), 0.15);
+  --glow-primary-strong: rgba(var(--primary-rgb), 0.3);
+  --grid-line: rgba(var(--foreground-rgb), 0.05);
+  --noise-opacity: 0.02;
+  --gradient-glow-1: rgba(var(--primary-rgb), 0.12);
+  --gradient-glow-2: rgba(63, 110, 165, 0.08);
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), sans-serif;
+  --font-display: var(--font-display-face), sans-serif;
+  --font-mono: var(--font-jetbrains), monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    transition-property: background-color, border-color, color, fill, stroke,
+      box-shadow;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    transition-duration: 0.4s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition-duration: 0s !important;
+    }
+  }
+
+  html {
+    background-color: var(--background);
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html.light {
+    color-scheme: light;
+  }
+
+  /* Nav items use scroll-margin instead of a JS-maintained offset constant —
+     keep this in sync with the nav's rendered height (see navigation.tsx). */
+  :root {
+    --nav-offset: 5rem;
+  }
+
+  [id] {
+    scroll-margin-top: var(--nav-offset);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-sans);
+  }
+
+  /* Faint background grid + radial glow, Linear/Vercel-style. Fixed so it
+     doesn't repeat per-section; kept very subtle per the brief. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 50% at 50% 0%, #000 40%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 0%, #000 40%, transparent 80%);
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 0%, var(--gradient-glow-1), transparent 60%),
+      radial-gradient(ellipse 50% 35% at 85% 15%, var(--gradient-glow-2), transparent 60%);
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+/* ---------- Skeleton loading ---------- */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton {
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    90deg,
+    var(--muted) 25%,
+    rgba(var(--foreground-rgb), 0.06) 37%,
+    var(--muted) 63%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
+
+/* Sticky nav — transparent over the hero, solid once scrolled */
+.solid-bar {
+  background: rgba(var(--background-rgb), 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Numbered section heading: index number + accent + display label */
+.section-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.section-label::before {
+  content: attr(data-index);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+/* ---------- Theme toggle icon swap ---------- */
+@keyframes theme-icon-pop {
+  from {
+    transform: scale(0.5) rotate(-90deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.theme-icon-pop {
+  animation: theme-icon-pop 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Editorial helpers ---------- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Elevated surface card with a soft glow on hover instead of a flat border
+   thickening — the theme's primary "premium" hover treatment. */
+.surface-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.surface-card-hover:hover {
+  border-color: rgba(var(--primary-rgb), 0.4);
+  box-shadow: 0 0 0 1px var(--glow-primary), 0 20px 60px -20px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Flat grid tile — kept for dense tag/chip grids (expertise section). */
+.tile-hover {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.tile-hover:hover {
+  border-color: var(--primary);
+  background-color: var(--secondary);
+}
+
+/* Aliases for the project case-study pages (still on the flat card look
+   until they're migrated to the dynamic [slug] route). */
+.glow-cyan {
+  border: 1px solid var(--border);
+}
+
+.glow-cyan-hover {
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.glow-cyan-hover:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.text-glow {
+  text-shadow: 0 0 30px var(--glow-primary);
+}
+
+.glass,
+.glass-subtle {
+  background: transparent;
+}
+
+/* ---------- Keyframe utilities (decorative, non-scroll-linked only —
+   scroll-linked / reveal animation now lives in components/motion/) ---------- */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ---------- Tech carousel marquee ---------- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--marquee-duration, 42s) linear infinite;
+  will-change: transform;
+}
+
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+.marquee-pause:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* ---------- Terminal cursor (still used sparingly) ---------- */
+@keyframes cursor-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.terminal-cursor {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+/* ---------- Form focus ---------- */
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 2px var(--glow-primary-strong);
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--foreground-rgb), 0.18);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--foreground-rgb), 0.3);
+}
+
+::selection {
+  background: var(--glow-primary-strong);
+  color: var(--foreground);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-float,
+  .theme-icon-pop {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
