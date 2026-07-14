@@ -45,12 +45,12 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[92vh] scroll-mt-28 flex-col justify-center gap-16 pt-28 lg:grid lg:min-h-screen lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-12 lg:pt-24"
+      className="relative flex min-h-[92vh] scroll-mt-28 flex-col justify-center gap-12 pt-28 md:gap-16 lg:grid lg:min-h-screen lg:grid-cols-2 lg:items-center lg:gap-20 lg:pt-0"
     >
       <FadeIn className="min-w-0">
         <p className="eyebrow">Backend &amp; Systems Engineer</p>
 
-        <h1 className="mt-4 font-display text-6xl font-semibold leading-[0.98] tracking-tight text-foreground sm:text-7xl lg:text-[5.5rem]">
+        <h1 className="mt-4 font-display text-5xl font-semibold leading-[0.98] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
           Senghout
           <br />
           Peng
