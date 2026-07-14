@@ -19,7 +19,7 @@ export const EXPERTISE_CATEGORIES: ExpertiseCategory[] = [
     label: "Backend & Systems",
     description: "Services, APIs, and the concurrency/data patterns that keep them consistent under load.",
     icon: "Server",
-    techSlugs: ["go", "php", "laravel", "fastapi", "node", "java"],
+    techSlugs: ["go", "php", "laravel", "fastapi", "node", "java", "springboot"],
   },
   {
     id: "data-infra",

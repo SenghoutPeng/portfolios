@@ -27,7 +27,10 @@ const RAW: Tech[] = [
   { key: "python", slug: "python", label: "Python", size: 108, category: "Languages" },
   { key: "go", slug: "go", label: "Go", size: 100, category: "Languages" },
   { key: "php", slug: "php", label: "PHP", size: 100, category: "Languages" },
+  { key: "java", slug: "java", label: "Java", size: 100, category: "Languages" },
   { key: "html", slug: "html5", label: "HTML5", size: 104, category: "Languages" },
+
+  { key: "springboot", slug: "springboot", label: "Spring Boot", size: 98, category: "Frameworks & Libraries" },
   { key: "css", slug: "css3", label: "CSS3", size: 100, category: "Languages" },
 
   { key: "next", slug: "nextdotjs", label: "Next.js", size: 104, category: "Frameworks & Libraries" },
@@ -39,6 +42,7 @@ const RAW: Tech[] = [
 
   { key: "postgres", slug: "postgresql", label: "PostgreSQL", size: 102, category: "Infrastructure & Data" },
   { key: "mysql", slug: "mysql", label: "MySQL", size: 100, category: "Infrastructure & Data" },
+  { key: "mariadb", slug: "mariadb", label: "MariaDB", size: 98, category: "Infrastructure & Data" },
   { key: "mongodb", slug: "mongodb", label: "MongoDB", size: 98, category: "Infrastructure & Data" },
   { key: "redis", slug: "redis", label: "Redis", size: 98, category: "Infrastructure & Data" },
   { key: "rabbitmq", slug: "rabbitmq", label: "RabbitMQ", size: 96, category: "Infrastructure & Data" },
