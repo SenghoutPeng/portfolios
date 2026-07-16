@@ -70,11 +70,12 @@ export const PROJECTS: Project[] = [
       "CSV bulk onboarding with auto-invites",
       "Self-paced or lecturer-controlled progression",
       "Assessment-wall progress gating",
+      "Assessment building syncs live data to cache",
       "Multi-tier progress dashboards",
       "Cloudflare R2 lesson material storage",
     ],
     howItWorks: [
-      { step: "1", title: "Director Onboards", description: "Bulk-uploads students and lecturers via CSV, triggering automatic invite emails" },
+      { step: "1", title: "Director Onboards", description: "Bulk invite uservia CSV, triggering automatic invite emails" },
       { step: "2", title: "Lecturer Builds Content", description: "Structures lessons and assessments, choosing self-paced or scheduled delivery" },
       { step: "3", title: "Student Progresses", description: "Works through lessons behind an assessment-wall that unlocks material on mastery" },
       { step: "4", title: "Dashboards Report", description: "Director and lecturer dashboards track individual and class-wide progress live" },
@@ -94,7 +95,7 @@ export const PROJECTS: Project[] = [
       },
       {
         title: "Service-to-Service Consistency",
-        problem: "Keeping independent Go microservices and their own databases in sync without tight coupling",
+        problem: "Keeping independent Go microservices and their own databases in sync without tight coupling using gRPC communication",
         solution: "Adopted an event-driven architecture with RabbitMQ and Redis caching, so services react to events instead of polling each other",
         icon: "Waypoints",
       },
@@ -150,6 +151,43 @@ export const PROJECTS: Project[] = [
         problem: "Participants who didn't win a competition often left with no lasting record of their work",
         solution: "Added a recognition module that publishes every contributor's profile and project, not just winners",
         icon: "Award",
+      },
+    ],
+  },
+  {
+    slug: "dev-search",
+    title: "Dev Search",
+    tagline: "RAG Search System",
+    description:
+      "A RAG search system that answers question solely based on the provided datasets about backend programming languages, specifically Java(Springboot), PHP(Laravel), Golang(Gin and GORM)",
+    year: "2026",
+    status: "active",
+    role: "",
+    teamSize: 13,
+    tech: ["python", "streamlit", "chromadb", "gemini","ollama"],
+    logo: "/logos/dev-search.png",
+    featured: true,
+    metrics: [
+      { label: "", value: "" },
+      { label: "", value: "" },
+      { label: "", value: "" },
+    ],
+    features: [
+      "",
+      "",
+      "",
+      "",
+
+    ],
+    howItWorks: [
+      { step: "1", title: "", description: "" },
+    ],
+    challenges: [
+      {
+        title: "Refactoring for Open Access",
+        problem: "",
+        solution: "",
+        icon: "",
       },
     ],
   },

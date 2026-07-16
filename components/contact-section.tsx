@@ -11,7 +11,7 @@ const socials = [
   { label: "LinkedIn", href: "", icon: Linkedin },
   { label: "GitHub", href: "", icon: Github },
   { label: "Telegram", href: "", icon: Send },
-  { label: "Email", href: "mailto:henglong0000@gmail.com", icon: Mail },
+  { label: "Email", href: "senghout.peng@gmail.com", icon: Mail },
 ]
 
 // TODO: confirm this is still accurate closer to send time.
