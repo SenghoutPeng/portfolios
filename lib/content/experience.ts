@@ -19,7 +19,7 @@ export const EXPERIENCE: ExperienceEntry[] = [
     // TODO: replace with real scope/ownership summary.
     summary: "",
     bullets: [],
-    relatedProjectSlugs: ["mylms", "stem-arkh"],
+    relatedProjectSlugs: ["mylms"],
   },
   {
     id: "stem-arkh-api-lead",

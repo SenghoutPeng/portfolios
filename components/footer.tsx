@@ -1,4 +1,4 @@
-const STACK = ["Next.js", "TypeScript", "Tailwind CSS", "Motion", "Vercel"]
+const STACK = ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"]
 
 const VERSION = "v1.0"
 const LAST_UPDATED_YEAR = new Date().getFullYear()
