@@ -13,7 +13,7 @@ const socials = [
   { label: "LinkedIn", href: "", icon: Linkedin },
   { label: "GitHub", href: "", icon: Github },
   { label: "Telegram", href: "", icon: Send },
-  { label: "Email", href: "mailto:henglong0000@gmail.com", icon: Mail },
+  { label: "Email", href: "mailto:senghout.peng@gmail.com", icon: Mail },
 ]
 
 // Placeholder counters — swapped for real GitHub stats where the API

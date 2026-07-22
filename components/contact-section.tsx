@@ -29,7 +29,7 @@ export function ContactSection() {
     const body = encodeURIComponent(
       `${message}\n\n— ${name}${email ? ` (${email})` : ""}`
     )
-    window.location.href = `mailto:henglong0000@gmail.com?subject=${subject}&body=${body}`
+    window.location.href = `mailto:senghout.peng@gmail.com?subject=${subject}&body=${body}`
   }
 
   const fieldClass =
