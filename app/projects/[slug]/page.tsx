@@ -1,70 +1,78 @@
-import type { Metadata } from "next"
-import Link from "next/link"
-import { notFound } from "next/navigation"
-import * as Icons from "lucide-react"
-import type { LucideIcon } from "lucide-react"
-import { ArrowLeft, ArrowUpRight, Calendar, Github, Users } from "lucide-react"
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import * as Icons from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Calendar, Github, Users } from "lucide-react";
 
-import { getProjectBySlug, PROJECTS } from "@/lib/content/projects"
-import { TECH_STACK, resolveIcon } from "@/lib/tech-stack"
-import { FadeIn, StaggerGroup, StaggerItem } from "@/components/motion"
-import { Button } from "@/components/ui/button"
-import { ProjectLogo } from "@/components/project-logo"
+import { getProjectBySlug, PROJECTS } from "@/lib/content/projects";
+import { TECH_STACK, resolveIcon } from "@/lib/tech-stack";
+import { FadeIn, StaggerGroup, StaggerItem } from "@/components/motion";
+import { Button } from "@/components/ui/button";
+import { ProjectLogo } from "@/components/project-logo";
 
 type PageProps = {
-  params: Promise<{ slug: string }>
-}
+  params: Promise<{ slug: string }>;
+};
 
 export async function generateStaticParams() {
-  return PROJECTS.map((p) => ({ slug: p.slug }))
+  return PROJECTS.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params
-  const project = getProjectBySlug(slug)
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
-    notFound()
+    notFound();
   }
 
   return {
     title: `${project.title} | Case Study | Senghout Peng`,
     description: project.tagline,
-  }
+  };
 }
 
 /** Brighten near-black brand glyphs so they stay visible on the dark canvas. */
 function iconColor(hex: string): string {
-  const r = parseInt(hex.slice(0, 2), 16)
-  const g = parseInt(hex.slice(2, 4), 16)
-  const b = parseInt(hex.slice(4, 6), 16)
-  const luminance = 0.299 * r + 0.587 * g + 0.114 * b
-  return luminance < 30 ? "#f5f2ed" : `#${hex}`
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+  const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+  return luminance < 30 ? "#f5f2ed" : `#${hex}`;
 }
 
 function TechChip({ slug }: { slug: string }) {
-  const tech = TECH_STACK.find((t) => t.key === slug)
-  if (!tech) return null
-  const icon = resolveIcon(tech.slug)
+  const tech = TECH_STACK.find((t) => t.key === slug);
+  if (!tech) return null;
+  const icon = resolveIcon(tech.slug);
 
   return (
     <span className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface-2 px-3 py-1.5 text-sm font-medium text-foreground/90">
       {icon ? (
-        <svg viewBox="0 0 24 24" width={16} height={16} fill={iconColor(icon.hex)} aria-hidden="true">
+        <svg
+          viewBox="0 0 24 24"
+          width={16}
+          height={16}
+          fill={iconColor(icon.hex)}
+          aria-hidden="true"
+        >
           <path d={icon.path} />
         </svg>
       ) : null}
       {tech.label}
     </span>
-  )
+  );
 }
 
 export default async function ProjectPage({ params }: PageProps) {
-  const { slug } = await params
-  const project = getProjectBySlug(slug)
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -82,7 +90,11 @@ export default async function ProjectPage({ params }: PageProps) {
       {/* Header */}
       <FadeIn delay={0.05}>
         <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center">
-          <ProjectLogo src={project.logo} title={project.title} className="h-20 w-20 sm:h-24 sm:w-24" />
+          <ProjectLogo
+            src={project.logo}
+            title={project.title}
+            className="h-20 w-20 sm:h-24 sm:w-24"
+          />
           <div className="min-w-0">
             <span className="eyebrow">{project.status}</span>
             <h1 className="font-display mt-2 text-4xl font-semibold text-foreground sm:text-5xl">
@@ -97,7 +109,9 @@ export default async function ProjectPage({ params }: PageProps) {
             <Calendar className="size-3.5 text-primary" />
             {project.year}
           </span>
-          <span className="font-mono text-xs uppercase tracking-wide">{project.role}</span>
+          <span className="font-mono text-xs uppercase tracking-wide">
+            {project.role}
+          </span>
           {project.teamSize ? (
             <span className="inline-flex items-center gap-1.5">
               <Users className="size-3.5 text-primary" />
@@ -110,7 +124,11 @@ export default async function ProjectPage({ params }: PageProps) {
           <div className="mt-6 flex flex-wrap items-center gap-3">
             {project.githubUrl ? (
               <Button asChild variant="outline">
-                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Github className="size-4" />
                   Source
                 </a>
@@ -118,7 +136,11 @@ export default async function ProjectPage({ params }: PageProps) {
             ) : null}
             {project.liveUrl ? (
               <Button asChild>
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Live site
                   <ArrowUpRight className="size-4" />
                 </a>
@@ -181,7 +203,9 @@ export default async function ProjectPage({ params }: PageProps) {
                 <StaggerItem key={feature}>
                   <div className="surface-card flex items-start gap-3 p-4">
                     <span className="mt-0.5 size-1.5 shrink-0 rounded-full bg-primary" />
-                    <span className="text-sm text-foreground/90">{feature}</span>
+                    <span className="text-sm text-foreground/90">
+                      {feature}
+                    </span>
                   </div>
                 </StaggerItem>
               ))}
@@ -229,13 +253,17 @@ export default async function ProjectPage({ params }: PageProps) {
             </h2>
             <StaggerGroup className="mt-5 flex flex-col gap-4">
               {project.challenges.map((challenge) => {
-                const IconComponent = (Icons as unknown as Record<string, LucideIcon>)[challenge.icon]
+                const IconComponent = (
+                  Icons as unknown as Record<string, LucideIcon>
+                )[challenge.icon];
                 return (
                   <StaggerItem key={challenge.title}>
                     <div className="surface-card p-6">
                       <div className="flex items-center gap-3">
                         <div className="grid size-9 shrink-0 place-items-center rounded-lg bg-surface-2 text-primary">
-                          {IconComponent ? <IconComponent className="size-4" /> : null}
+                          {IconComponent ? (
+                            <IconComponent className="size-4" />
+                          ) : null}
                         </div>
                         <h3 className="font-display text-lg font-semibold text-foreground">
                           {challenge.title}
@@ -261,7 +289,7 @@ export default async function ProjectPage({ params }: PageProps) {
                       </div>
                     </div>
                   </StaggerItem>
-                )
+                );
               })}
             </StaggerGroup>
           </div>
@@ -281,5 +309,5 @@ export default async function ProjectPage({ params }: PageProps) {
         </div>
       </FadeIn>
     </main>
-  )
+  );
 }

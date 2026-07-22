@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
+import { useState } from "react";
+import Image from "next/image";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 /**
  * Renders a project's logo image, falling back to its initial letter in a
@@ -16,18 +16,18 @@ export function ProjectLogo({
   title,
   className,
 }: {
-  src?: string
-  title: string
-  className?: string
+  src?: string;
+  title: string;
+  className?: string;
 }) {
-  const [errored, setErrored] = useState(false)
-  const showImage = src && !errored
+  const [errored, setErrored] = useState(false);
+  const showImage = src && !errored;
 
   return (
     <div
       className={cn(
         "grid shrink-0 place-items-center overflow-hidden rounded-2xl border border-border bg-surface-2 shadow-[0_0_0_1px_var(--glow-primary)]",
-        className
+        className,
       )}
     >
       {showImage ? (
@@ -40,8 +40,10 @@ export function ProjectLogo({
           onError={() => setErrored(true)}
         />
       ) : (
-        <span className="font-display text-3xl text-primary">{title.charAt(0)}</span>
+        <span className="font-display text-3xl text-primary">
+          {title.charAt(0)}
+        </span>
       )}
     </div>
-  )
+  );
 }

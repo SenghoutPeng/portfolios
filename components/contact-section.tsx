@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState, type FormEvent } from "react"
-import { Linkedin, Github, Send, Mail, Clock, CircleDot } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { FadeIn } from "@/components/motion"
+import { useState, type FormEvent } from "react";
+import { Linkedin, Github, Send, Mail, Clock, CircleDot } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { FadeIn } from "@/components/motion";
 
 // TODO: fill these in — empty href leaves the link inert for now, matching
 // the placeholder pattern used in hero-section.tsx.
@@ -12,28 +12,30 @@ const socials = [
   { label: "GitHub", href: "", icon: Github },
   { label: "Telegram", href: "", icon: Send },
   { label: "Email", href: "senghout.peng@gmail.com", icon: Mail },
-]
+];
 
 // TODO: confirm this is still accurate closer to send time.
-const AVAILABILITY = "Open to internships / new grad roles"
-const TIMEZONE = "GMT+7 (Phnom Penh)"
+const AVAILABILITY = "Open to internships / new grad roles";
+const TIMEZONE = "GMT+7 (Phnom Penh)";
 
 export function ContactSection() {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [message, setMessage] = useState("")
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    const subject = encodeURIComponent(`Portfolio message from ${name || "someone"}`)
+    e.preventDefault();
+    const subject = encodeURIComponent(
+      `Portfolio message from ${name || "someone"}`,
+    );
     const body = encodeURIComponent(
-      `${message}\n\n— ${name}${email ? ` (${email})` : ""}`
-    )
-    window.location.href = `mailto:senghout.peng@gmail.com?subject=${subject}&body=${body}`
-  }
+      `${message}\n\n— ${name}${email ? ` (${email})` : ""}`,
+    );
+    window.location.href = `mailto:senghout.peng@gmail.com?subject=${subject}&body=${body}`;
+  };
 
   const fieldClass =
-    "w-full rounded-md border border-border bg-surface-1 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-colors focus:border-primary"
+    "w-full rounded-md border border-border bg-surface-1 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-colors focus:border-primary";
 
   return (
     <section id="contact" className="scroll-mt-28">
@@ -85,7 +87,11 @@ export function ContactSection() {
                     key={label}
                     href={href || undefined}
                     target={href.startsWith("http") ? "_blank" : undefined}
-                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    rel={
+                      href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
                     aria-label={label}
                     className="tile-hover flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:text-primary"
                   >
@@ -153,5 +159,5 @@ export function ContactSection() {
         </FadeIn>
       </div>
     </section>
-  )
+  );
 }

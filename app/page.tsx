@@ -1,11 +1,11 @@
-import { Navigation } from "@/components/navigation"
-import { HeroSection } from "@/components/hero-section"
-import { FeaturedProjectsSection } from "@/components/featured-projects-section"
-import { PhilosophySection } from "@/components/philosophy-section"
-import { ExpertiseSection } from "@/components/expertise-section"
-import { ExperienceSection } from "@/components/experience-section"
-import { ContactSection } from "@/components/contact-section"
-import { Footer } from "@/components/footer"
+import { Navigation } from "@/components/navigation";
+import { HeroSection } from "@/components/hero-section";
+import { FeaturedProjectsSection } from "@/components/featured-projects-section";
+import { PhilosophySection } from "@/components/philosophy-section";
+import { ExpertiseSection } from "@/components/expertise-section";
+import { ExperienceSection } from "@/components/experience-section";
+import { ContactSection } from "@/components/contact-section";
+import { Footer } from "@/components/footer";
 
 export default function Home() {
   return (
@@ -26,5 +26,5 @@ export default function Home() {
 
       <Footer />
     </main>
-  )
+  );
 }

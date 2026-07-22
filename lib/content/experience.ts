@@ -1,14 +1,14 @@
 export type ExperienceEntry = {
-  id: string
-  role: string
-  org: string
-  period: { start: string; end: string | "present" }
-  summary: string
+  id: string;
+  role: string;
+  org: string;
+  period: { start: string; end: string | "present" };
+  summary: string;
   /** TODO: fill in real bullets — kept empty-safe so the section renders
    *  cleanly even before real content is written. */
-  bullets: string[]
-  relatedProjectSlugs?: string[]
-}
+  bullets: string[];
+  relatedProjectSlugs?: string[];
+};
 
 export const EXPERIENCE: ExperienceEntry[] = [
   {
@@ -31,4 +31,4 @@ export const EXPERIENCE: ExperienceEntry[] = [
     bullets: [],
     relatedProjectSlugs: ["stem-arkh"],
   },
-]
+];

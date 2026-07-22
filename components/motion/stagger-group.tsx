@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { motion } from "motion/react"
-import type { ReactNode } from "react"
-import { fadeUp, staggerContainer } from "./variants"
+import { motion } from "motion/react";
+import type { ReactNode } from "react";
+import { fadeUp, staggerContainer } from "./variants";
 
 export function StaggerGroup({
   children,
   className,
 }: {
-  children: ReactNode
-  className?: string
+  children: ReactNode;
+  className?: string;
 }) {
   return (
     <motion.div
@@ -21,19 +21,19 @@ export function StaggerGroup({
     >
       {children}
     </motion.div>
-  )
+  );
 }
 
 export function StaggerItem({
   children,
   className,
 }: {
-  children: ReactNode
-  className?: string
+  children: ReactNode;
+  className?: string;
 }) {
   return (
     <motion.div className={className} variants={fadeUp}>
       {children}
     </motion.div>
-  )
+  );
 }

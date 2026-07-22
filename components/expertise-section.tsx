@@ -1,33 +1,39 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import * as Icons from "lucide-react"
-import type { LucideIcon } from "lucide-react"
-import { ChevronDown } from "lucide-react"
-import { StaggerGroup, StaggerItem } from "@/components/motion"
-import { cn } from "@/lib/utils"
-import { EXPERTISE_CATEGORIES } from "@/lib/content/expertise"
-import { TECH_STACK, resolveIcon } from "@/lib/tech-stack"
+import { useState } from "react";
+import * as Icons from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { StaggerGroup, StaggerItem } from "@/components/motion";
+import { cn } from "@/lib/utils";
+import { EXPERTISE_CATEGORIES } from "@/lib/content/expertise";
+import { TECH_STACK, resolveIcon } from "@/lib/tech-stack";
 
 /* Background is dark now — near-BLACK brand marks need brightening instead
    of near-white marks needing darkening (inverse of the old light-canvas logic). */
 function displayHex(hex: string): string {
-  const r = parseInt(hex.slice(0, 2), 16)
-  const g = parseInt(hex.slice(2, 4), 16)
-  const b = parseInt(hex.slice(4, 6), 16)
-  const lum = 0.299 * r + 0.587 * g + 0.114 * b
-  return lum < 30 ? "f5f2ed" : hex
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+  const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+  return lum < 30 ? "f5f2ed" : hex;
 }
 
 function CategoryIcon({ name }: { name: string }) {
-  const Icon = (Icons as unknown as Record<string, LucideIcon>)[name]
-  if (!Icon) return null
-  return <Icon className="h-6 w-6 text-primary" strokeWidth={1.75} aria-hidden="true" />
+  const Icon = (Icons as unknown as Record<string, LucideIcon>)[name];
+  if (!Icon) return null;
+  return (
+    <Icon
+      className="h-6 w-6 text-primary"
+      strokeWidth={1.75}
+      aria-hidden="true"
+    />
+  );
 }
 
 function TechGlyph({ slug, className }: { slug: string; className?: string }) {
-  const icon = resolveIcon(slug)
-  if (!icon) return null
+  const icon = resolveIcon(slug);
+  if (!icon) return null;
   return (
     <svg
       viewBox="0 0 24 24"
@@ -38,7 +44,7 @@ function TechGlyph({ slug, className }: { slug: string; className?: string }) {
     >
       <path d={icon.path} />
     </svg>
-  )
+  );
 }
 
 function CategoryCard({
@@ -47,15 +53,15 @@ function CategoryCard({
   icon,
   techSlugs,
 }: {
-  label: string
-  description: string
-  icon: string
-  techSlugs: string[]
+  label: string;
+  description: string;
+  icon: string;
+  techSlugs: string[];
 }) {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(true);
   const techs = techSlugs
     .map((slug) => TECH_STACK.find((t) => t.key === slug))
-    .filter((t): t is (typeof TECH_STACK)[number] => Boolean(t))
+    .filter((t): t is (typeof TECH_STACK)[number] => Boolean(t));
 
   return (
     <div className="surface-card surface-card-hover flex h-full flex-col gap-4 p-6">
@@ -70,14 +76,18 @@ function CategoryCard({
             <CategoryIcon name={icon} />
           </div>
           <div>
-            <h3 className="font-display text-lg font-semibold text-foreground">{label}</h3>
-            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{description}</p>
+            <h3 className="font-display text-lg font-semibold text-foreground">
+              {label}
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+              {description}
+            </p>
           </div>
         </div>
         <ChevronDown
           className={cn(
             "mt-2 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300",
-            open && "rotate-180"
+            open && "rotate-180",
           )}
           aria-hidden="true"
         />
@@ -97,7 +107,7 @@ function CategoryCard({
         </div>
       )}
     </div>
-  )
+  );
 }
 
 export function ExpertiseSection() {
@@ -109,7 +119,12 @@ export function ExpertiseSection() {
 
       <StaggerGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {EXPERTISE_CATEGORIES.map((category) => (
-          <StaggerItem key={category.id} className={cn(category.id === "tools" && "sm:col-span-2 lg:col-span-1")}>
+          <StaggerItem
+            key={category.id}
+            className={cn(
+              category.id === "tools" && "sm:col-span-2 lg:col-span-1",
+            )}
+          >
             <CategoryCard
               label={category.label}
               description={category.description}
@@ -120,5 +135,5 @@ export function ExpertiseSection() {
         ))}
       </StaggerGroup>
     </section>
-  )
+  );
 }

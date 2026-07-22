@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { motion } from "motion/react"
+import { motion } from "motion/react";
 
 /**
  * Abstract architecture-flavored visual for the hero — nodes + connecting
@@ -16,7 +16,7 @@ const nodes = [
   { id: "queue", x: 66, y: 64, label: "queue" },
   { id: "cache", x: 34, y: 64, label: "cache" },
   { id: "db", x: 50, y: 88, label: "db" },
-]
+];
 
 const edges: [string, string][] = [
   ["gateway", "auth"],
@@ -27,17 +27,17 @@ const edges: [string, string][] = [
   ["workers", "queue"],
   ["cache", "db"],
   ["queue", "db"],
-]
+];
 
-const nodeMap = Object.fromEntries(nodes.map((n) => [n.id, n]))
+const nodeMap = Object.fromEntries(nodes.map((n) => [n.id, n]));
 
 export function HeroDiagram() {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-md">
       <svg viewBox="0 0 100 100" className="h-full w-full overflow-visible">
         {edges.map(([from, to], i) => {
-          const a = nodeMap[from]
-          const b = nodeMap[to]
+          const a = nodeMap[from];
+          const b = nodeMap[to];
           return (
             <motion.line
               key={`${from}-${to}`}
@@ -49,14 +49,18 @@ export function HeroDiagram() {
               strokeWidth={0.4}
               initial={{ pathLength: 0, opacity: 0 }}
               animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 0.8,
+                delay: 0.3 + i * 0.06,
+                ease: [0.22, 1, 0.36, 1],
+              }}
             />
-          )
+          );
         })}
 
         {edges.map(([from, to], i) => {
-          const a = nodeMap[from]
-          const b = nodeMap[to]
+          const a = nodeMap[from];
+          const b = nodeMap[to];
           return (
             <motion.circle
               key={`pulse-${from}-${to}`}
@@ -76,7 +80,7 @@ export function HeroDiagram() {
                 ease: "easeInOut",
               }}
             />
-          )
+          );
         })}
 
         {nodes.map((n, i) => (
@@ -84,7 +88,11 @@ export function HeroDiagram() {
             key={n.id}
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+            transition={{
+              duration: 0.5,
+              delay: 0.1 + i * 0.06,
+              ease: [0.22, 1, 0.36, 1],
+            }}
           >
             <circle
               cx={n.x}
@@ -111,5 +119,5 @@ export function HeroDiagram() {
         </motion.span>
       ))}
     </div>
-  )
+  );
 }

@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { motion } from "motion/react"
-import type { ReactNode } from "react"
-import { fadeUp } from "./variants"
+import { motion } from "motion/react";
+import type { ReactNode } from "react";
+import { fadeUp } from "./variants";
 
 export function FadeIn({
   children,
   className,
   delay = 0,
 }: {
-  children: ReactNode
-  className?: string
-  delay?: number
+  children: ReactNode;
+  className?: string;
+  delay?: number;
 }) {
   return (
     <motion.div
@@ -24,5 +24,5 @@ export function FadeIn({
     >
       {children}
     </motion.div>
-  )
+  );
 }

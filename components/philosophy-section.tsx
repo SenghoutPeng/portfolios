@@ -1,12 +1,18 @@
-import * as Icons from "lucide-react"
-import type { LucideIcon } from "lucide-react"
-import { StaggerGroup, StaggerItem } from "@/components/motion"
-import { PHILOSOPHY_PRINCIPLES } from "@/lib/content/philosophy"
+import * as Icons from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { StaggerGroup, StaggerItem } from "@/components/motion";
+import { PHILOSOPHY_PRINCIPLES } from "@/lib/content/philosophy";
 
 function PrincipleIcon({ name }: { name: string }) {
-  const Icon = (Icons as unknown as Record<string, LucideIcon>)[name]
-  if (!Icon) return null
-  return <Icon className="h-6 w-6 text-primary" strokeWidth={1.75} aria-hidden="true" />
+  const Icon = (Icons as unknown as Record<string, LucideIcon>)[name];
+  if (!Icon) return null;
+  return (
+    <Icon
+      className="h-6 w-6 text-primary"
+      strokeWidth={1.75}
+      aria-hidden="true"
+    />
+  );
 }
 
 export function PhilosophySection() {
@@ -34,5 +40,5 @@ export function PhilosophySection() {
         ))}
       </StaggerGroup>
     </section>
-  )
+  );
 }

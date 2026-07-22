@@ -1,7 +1,7 @@
-const STACK = ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"]
+const STACK = ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"];
 
-const VERSION = "v1.0"
-const LAST_UPDATED_YEAR = new Date().getFullYear()
+const VERSION = "v1.0";
+const LAST_UPDATED_YEAR = new Date().getFullYear();
 
 export function Footer() {
   return (
@@ -34,5 +34,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

@@ -1,20 +1,27 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { Download, Linkedin, Github, Send, Mail, ArrowDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { FadeIn, CountUp, Magnetic } from "@/components/motion"
-import { scrollToId } from "@/lib/utils"
-import { HeroDiagram } from "@/components/hero-diagram"
+import { useEffect, useState } from "react";
+import {
+  Download,
+  Linkedin,
+  Github,
+  Send,
+  Mail,
+  ArrowDown,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { FadeIn, CountUp, Magnetic } from "@/components/motion";
+import { scrollToId } from "@/lib/utils";
+import { HeroDiagram } from "@/components/hero-diagram";
 
 // TODO: fill these in — empty href leaves the link inert for now.
-const CV_HREF = ""
+const CV_HREF = "";
 const socials = [
   { label: "LinkedIn", href: "", icon: Linkedin },
   { label: "GitHub", href: "", icon: Github },
   { label: "Telegram", href: "", icon: Send },
   { label: "Email", href: "mailto:senghout.peng@gmail.com", icon: Mail },
-]
+];
 
 // Placeholder counters — swapped for real GitHub stats where the API
 // resolves; everything else stays a TODO number until supplied.
@@ -22,25 +29,25 @@ const staticStats = [
   { value: "3+", label: "Years Coding" },
   { value: "2", label: "Systems Shipped" },
   { value: "20+", label: "Technologies" },
-]
+];
 
 export function HeroSection() {
-  const [contributions, setContributions] = useState<string | null>(null)
+  const [contributions, setContributions] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/github/contributions", { cache: "no-store" })
       .then((res) => (res.ok ? res.json() : null))
       .then((json) => {
-        const total = json?.stats?.totalContributions
-        if (typeof total === "number") setContributions(`${total}+`)
+        const total = json?.stats?.totalContributions;
+        if (typeof total === "number") setContributions(`${total}+`);
       })
-      .catch(() => {})
-  }, [])
+      .catch(() => {});
+  }, []);
 
   const stats = [
     ...staticStats,
     { value: contributions ?? "—", label: "GitHub Contributions" },
-  ]
+  ];
 
   return (
     <section
@@ -64,7 +71,10 @@ export function HeroSection() {
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
           <Magnetic>
-            <a href={CV_HREF} download={CV_HREF ? "Senghout-Peng_CV.pdf" : undefined}>
+            <a
+              href={CV_HREF}
+              download={CV_HREF ? "Senghout-Peng_CV.pdf" : undefined}
+            >
               <Button className="h-11 gap-2 bg-primary px-6 font-medium text-primary-foreground shadow-[0_0_30px_var(--glow-primary)] hover:bg-primary/90">
                 Download CV
                 <Download className="size-4" />
@@ -86,7 +96,9 @@ export function HeroSection() {
                 key={label}
                 href={href || undefined}
                 target={href.startsWith("http") ? "_blank" : undefined}
-                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                rel={
+                  href.startsWith("http") ? "noopener noreferrer" : undefined
+                }
                 aria-label={label}
                 className="text-muted-foreground transition-colors hover:text-primary"
               >
@@ -123,5 +135,5 @@ export function HeroSection() {
         <ArrowDown className="size-5" />
       </button>
     </section>
-  )
+  );
 }

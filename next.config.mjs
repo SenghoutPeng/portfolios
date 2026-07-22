@@ -10,8 +10,8 @@ const nextConfig = {
     root: process.cwd(),
   },
   // Allow development access from local network (iPhone, other devices)
-  allowedDevOrigins: ['192.168.3.74'],
-  
+  allowedDevOrigins: ["192.168.3.74"],
+
   // Security Headers
   async headers() {
     return [
@@ -47,7 +47,8 @@ const nextConfig = {
           {
             // Control browser features/APIs — allow camera for AI Hand demo
             key: "Permissions-Policy",
-            value: "camera=(self), microphone=(), geolocation=(), browsing-topics=()",
+            value:
+              "camera=(self), microphone=(), geolocation=(), browsing-topics=()",
           },
           {
             // Content Security Policy - hardened but allows necessary resources
@@ -90,6 +91,6 @@ const nextConfig = {
       },
     ];
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;

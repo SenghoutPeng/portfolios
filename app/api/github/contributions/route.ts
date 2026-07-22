@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 
 // Ensure this runs on the Node.js runtime so process.env is available consistently
-export const runtime = "nodejs"
-export const dynamic = "force-dynamic"
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 const query = `
   query($login: String!) {
@@ -22,18 +22,24 @@ const query = `
       }
     }
   }
-`
+`;
 
 export async function GET() {
-  const token = process.env.GITHUB_TOKEN
-  const login = process.env.GITHUB_LOGIN || "SenghoutPeng"
+  const token = process.env.GITHUB_TOKEN;
+  const login = process.env.GITHUB_LOGIN || "SenghoutPeng";
 
   if (!token) {
-    return NextResponse.json({ error: "Missing GITHUB_TOKEN" }, { status: 400 })
+    return NextResponse.json(
+      { error: "Missing GITHUB_TOKEN" },
+      { status: 400 },
+    );
   }
 
   if (!login) {
-    return NextResponse.json({ error: "Missing GITHUB_LOGIN" }, { status: 400 })
+    return NextResponse.json(
+      { error: "Missing GITHUB_LOGIN" },
+      { status: 400 },
+    );
   }
 
   try {
@@ -45,33 +51,41 @@ export async function GET() {
       },
       body: JSON.stringify({ query, variables: { login } }),
       cache: "no-store",
-    })
+    });
 
     if (!res.ok) {
-      const text = await res.text()
-      return NextResponse.json({ error: "GitHub API error", details: text }, { status: res.status })
+      const text = await res.text();
+      return NextResponse.json(
+        { error: "GitHub API error", details: text },
+        { status: res.status },
+      );
     }
 
-    const json = await res.json()
+    const json = await res.json();
 
     // GraphQL may return HTTP 200 with an `errors` array
     if (json?.errors?.length) {
       return NextResponse.json(
         { error: "GitHub GraphQL errors", details: json.errors },
-        { status: 502 }
-      )
+        { status: 502 },
+      );
     }
 
-    const user = json?.data?.user
+    const user = json?.data?.user;
 
     if (!user) {
-      return NextResponse.json({ error: "No user data returned" }, { status: 500 })
+      return NextResponse.json(
+        { error: "No user data returned" },
+        { status: 500 },
+      );
     }
 
-    const calendar = user.contributionsCollection.contributionCalendar
+    const calendar = user.contributionsCollection.contributionCalendar;
     const weeks: number[][] = (calendar?.weeks ?? []).map((week: any) =>
-      (week?.contributionDays ?? []).map((day: any) => day?.contributionCount ?? 0)
-    )
+      (week?.contributionDays ?? []).map(
+        (day: any) => day?.contributionCount ?? 0,
+      ),
+    );
 
     return NextResponse.json(
       {
@@ -83,12 +97,12 @@ export async function GET() {
           weeks,
         },
       },
-      { status: 200 }
-    )
+      { status: 200 },
+    );
   } catch (error: any) {
     return NextResponse.json(
       { error: "Unexpected error", details: error?.message ?? String(error) },
-      { status: 500 }
-    )
+      { status: 500 },
+    );
   }
 }

@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { motion, useScroll } from "motion/react"
-import { cn, scrollToId, getVisibleElementById } from "@/lib/utils"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion, useScroll } from "motion/react";
+import { cn, scrollToId, getVisibleElementById } from "@/lib/utils";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 /**
  * Nav items support both in-page anchors and real routes from day one, so
@@ -15,7 +15,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
  */
 type NavItem =
   | { type: "anchor"; id: string; label: string }
-  | { type: "route"; href: string; label: string }
+  | { type: "route"; href: string; label: string };
 
 const items: NavItem[] = [
   { type: "anchor", id: "projects", label: "Work" },
@@ -23,59 +23,60 @@ const items: NavItem[] = [
   { type: "anchor", id: "expertise", label: "Expertise" },
   { type: "anchor", id: "experience", label: "Experience" },
   { type: "anchor", id: "contact", label: "Contact" },
-]
+];
 
-const sectionIds = items.filter((i) => i.type === "anchor").map((i) => i.id)
+const sectionIds = items.filter((i) => i.type === "anchor").map((i) => i.id);
 
 export function Navigation() {
-  const [active, setActive] = useState("home")
-  const [scrolled, setScrolled] = useState(false)
-  const pathname = usePathname()
-  const { scrollYProgress } = useScroll()
+  const [active, setActive] = useState("home");
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const { scrollYProgress } = useScroll();
 
-  const onHome = pathname === "/"
+  const onHome = pathname === "/";
 
   useEffect(() => {
-    if (!onHome) return
+    if (!onHome) return;
     const onScroll = () => {
-      setScrolled(window.scrollY > 24)
+      setScrolled(window.scrollY > 24);
 
       if (window.scrollY < 160) {
-        setActive("home")
-        return
+        setActive("home");
+        return;
       }
       const atBottom =
-        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight - 2;
       if (atBottom) {
-        setActive(sectionIds[sectionIds.length - 1])
-        return
+        setActive(sectionIds[sectionIds.length - 1]);
+        return;
       }
       for (const id of [...sectionIds].reverse()) {
-        const el = getVisibleElementById(id)
+        const el = getVisibleElementById(id);
         if (el && el.getBoundingClientRect().top <= 200) {
-          setActive(id)
-          break
+          setActive(id);
+          break;
         }
       }
-    }
-    window.addEventListener("scroll", onScroll, { passive: true })
-    window.addEventListener("resize", onScroll, { passive: true })
-    onScroll()
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    onScroll();
     return () => {
-      window.removeEventListener("scroll", onScroll)
-      window.removeEventListener("resize", onScroll)
-    }
-  }, [onHome])
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [onHome]);
 
   useEffect(() => {
-    if (!onHome) setScrolled(true)
-  }, [onHome])
+    if (!onHome) setScrolled(true);
+  }, [onHome]);
 
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled && "solid-bar"
+        scrolled && "solid-bar",
       )}
     >
       {onHome && (
@@ -90,9 +91,9 @@ export function Navigation() {
           href="/"
           onClick={(e) => {
             if (onHome) {
-              e.preventDefault()
-              scrollToId("home")
-              setActive("home")
+              e.preventDefault();
+              scrollToId("home");
+              setActive("home");
             }
           }}
           className="font-display text-lg font-semibold tracking-tight text-foreground"
@@ -102,20 +103,20 @@ export function Navigation() {
 
         <nav className="hidden items-center gap-1 md:flex">
           {items.map((item) => {
-            const isActive = item.type === "anchor" && active === item.id
+            const isActive = item.type === "anchor" && active === item.id;
             const commonClass = cn(
               "rounded-none border-b-2 px-3 py-1.5 text-sm font-medium transition-colors",
               isActive
                 ? "border-primary text-primary"
-                : "border-transparent text-muted-foreground hover:text-foreground"
-            )
+                : "border-transparent text-muted-foreground hover:text-foreground",
+            );
 
             if (item.type === "route") {
               return (
                 <Link key={item.href} href={item.href} className={commonClass}>
                   {item.label}
                 </Link>
-              )
+              );
             }
 
             return (
@@ -123,17 +124,17 @@ export function Navigation() {
                 key={item.id}
                 onClick={() => {
                   if (onHome) {
-                    scrollToId(item.id)
-                    setActive(item.id)
+                    scrollToId(item.id);
+                    setActive(item.id);
                   } else {
-                    window.location.href = `/#${item.id}`
+                    window.location.href = `/#${item.id}`;
                   }
                 }}
                 className={commonClass}
               >
                 {item.label}
               </button>
-            )
+            );
           })}
         </nav>
 
@@ -145,18 +146,20 @@ export function Navigation() {
       {/* mobile section rail */}
       <nav className="flex items-center gap-1 overflow-x-auto border-t border-border/70 px-4 py-2 md:hidden">
         {items.map((item) => {
-          const isActive = item.type === "anchor" && active === item.id
+          const isActive = item.type === "anchor" && active === item.id;
           const commonClass = cn(
             "flex shrink-0 items-center rounded-full px-3 py-1.5 text-xs font-medium transition-colors",
-            isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground"
-          )
+            isActive
+              ? "bg-primary text-primary-foreground"
+              : "text-muted-foreground",
+          );
 
           if (item.type === "route") {
             return (
               <Link key={item.href} href={item.href} className={commonClass}>
                 {item.label}
               </Link>
-            )
+            );
           }
 
           return (
@@ -164,19 +167,19 @@ export function Navigation() {
               key={item.id}
               onClick={() => {
                 if (onHome) {
-                  scrollToId(item.id)
-                  setActive(item.id)
+                  scrollToId(item.id);
+                  setActive(item.id);
                 } else {
-                  window.location.href = `/#${item.id}`
+                  window.location.href = `/#${item.id}`;
                 }
               }}
               className={commonClass}
             >
               {item.label}
             </button>
-          )
+          );
         })}
       </nav>
     </header>
-  )
+  );
 }

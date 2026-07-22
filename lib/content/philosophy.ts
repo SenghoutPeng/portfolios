@@ -1,11 +1,11 @@
 export type PhilosophyPrinciple = {
-  id: string
-  title: string
+  id: string;
+  title: string;
   /** TODO: first-draft copy — personalize with real examples/voice. */
-  body: string
+  body: string;
   /** lucide-react icon name (PascalCase export). */
-  icon: string
-}
+  icon: string;
+};
 
 export const PHILOSOPHY_PRINCIPLES: PhilosophyPrinciple[] = [
   {
@@ -44,4 +44,4 @@ export const PHILOSOPHY_PRINCIPLES: PhilosophyPrinciple[] = [
     body: "Access control, input validation, and least-privilege service accounts are part of the first commit, not a hardening pass before a deadline. Retrofitting security is always more expensive than designing for it.",
     icon: "ShieldCheck",
   },
-]
+];

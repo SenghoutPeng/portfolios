@@ -1,8 +1,8 @@
-import { clsx, type ClassValue } from 'clsx'
-import { twMerge } from 'tailwind-merge'
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 /**
@@ -13,11 +13,11 @@ export function cn(...inputs: ClassValue[]) {
  * This finds the first match that isn't sitting inside a `[hidden]` ancestor.
  */
 export function getVisibleElementById(id: string): HTMLElement | null {
-  const matches = document.querySelectorAll<HTMLElement>(`#${id}`)
+  const matches = document.querySelectorAll<HTMLElement>(`#${id}`);
   for (const el of matches) {
-    if (!el.closest('[hidden]')) return el
+    if (!el.closest("[hidden]")) return el;
   }
-  return null
+  return null;
 }
 
 /**
@@ -27,9 +27,9 @@ export function getVisibleElementById(id: string): HTMLElement | null {
  */
 export function scrollToId(id: string) {
   if (id === "home") {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-    return
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
   }
-  const el = getVisibleElementById(id)
-  el?.scrollIntoView({ behavior: "smooth", block: "start" })
+  const el = getVisibleElementById(id);
+  el?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
